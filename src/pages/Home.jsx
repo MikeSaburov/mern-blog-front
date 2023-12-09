@@ -8,9 +8,15 @@ import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 
 export const Home = () => {
+  React.useEffect(() => {}, []);
+
   return (
     <>
-      <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
+      <Tabs
+        style={{ marginBottom: 15 }}
+        value={0}
+        aria-label="basic tabs example"
+      >
         <Tab label="Новые" />
         <Tab label="Популярные" />
       </Tabs>
@@ -35,7 +41,10 @@ export const Home = () => {
           ))}
         </Grid>
         <Grid xs={4} item>
-          <TagsBlock items={['react', 'typescript', 'заметки']} isLoading={false} />
+          <TagsBlock
+            items={['react', 'typescript', 'заметки']}
+            isLoading={false}
+          />
           <CommentsBlock
             items={[
               {
