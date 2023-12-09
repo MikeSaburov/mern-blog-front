@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,7 +15,9 @@ root.render(
     <CssBaseline />
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <App />
+        <Provider>
+          <App />
+        </Provider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
