@@ -55,7 +55,7 @@ export const Home = () => {
           )}
         </Grid>
         <Grid xs={4} item>
-          <TagsBlock items={tags.items} isLoading={false} />
+          <TagsBlock items={tags.items} isLoading={isLoadingTags} />
           <CommentsBlock
             items={[
               {
