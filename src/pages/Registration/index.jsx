@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuth, fetchAuth } from '../../redux/slices/auth';
+import { selectIsAuth, fetchRegister } from '../../redux/slices/auth';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import styles from './Login.module.scss';
@@ -18,7 +18,6 @@ export const Registration = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -30,10 +29,10 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
+    const data = await dispatch(fetchRegister(values));
 
     if (!data.payload) {
-      return alert('Не удалось авторизоваться!');
+      return alert('Не удалось зарегестрироваться!');
     }
     if ('token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token);
@@ -54,7 +53,6 @@ export const Registration = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          type="login"
           error={Boolean(errors.fullName?.message)}
           helperText={errors.fullName?.message}
           {...register('fullName', { required: 'Укажите полное имя' })}
