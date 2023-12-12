@@ -51,6 +51,7 @@ export const Login = () => {
         <TextField
           className={styles.field}
           label="E-Mail"
+          type="email"
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
           {...register('email', { required: 'Укажите почту' })}
