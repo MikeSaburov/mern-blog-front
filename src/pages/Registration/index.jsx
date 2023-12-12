@@ -80,7 +80,13 @@ export const Registration = () => {
           label="Пароль"
           fullWidth
         />
-        <Button type="submit" size="large" variant="contained" fullWidth>
+        <Button
+          disabled={!isValid}
+          type="submit"
+          size="large"
+          variant="contained"
+          fullWidth
+        >
           Зарегистрироваться
         </Button>
       </form>
