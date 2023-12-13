@@ -10,19 +10,21 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const AddPost = () => {
+  const imageUrl = '';
   const isAuth = useSelector(selectIsAuth);
 
-  const imageUrl = '';
   const [value, setValue] = React.useState('');
 
   const handleChangeFile = () => {};
 
   const onClickRemoveImage = () => {};
 
+  /* необходимо делать через useCallback. Это необходимо для  SimpleMDE*/
   const onChange = React.useCallback((value) => {
     setValue(value);
   }, []);
 
+  /*Настройки для SimpleMDE */
   const options = React.useMemo(
     () => ({
       spellChecker: false,
@@ -38,7 +40,7 @@ export const AddPost = () => {
     []
   );
 
-  if (!isAuth) {
+  if (!window.localStorage.getItem('token') && !isAuth) {
     return <Navigate to="/" />;
   }
 
