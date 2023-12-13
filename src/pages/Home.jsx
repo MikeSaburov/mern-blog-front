@@ -21,8 +21,6 @@ export const Home = () => {
     dispatch(fetchTags());
   }, []);
 
-  console.log(posts);
-
   return (
     <>
       <Tabs
@@ -47,7 +45,6 @@ export const Home = () => {
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}
                 commentsCount={3}
-                //isLoading={true}
                 tags={obj.tags}
                 isEditable
               />
