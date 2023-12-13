@@ -6,15 +6,15 @@ import SimpleMDE from 'react-simplemde-editor';
 import { selectIsAuth } from '../../redux/slices/auth';
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from '../../axios';
 
 export const AddPost = () => {
-  //const imageUrl = '';
+  const navigate = useNavigate();
   const isAuth = useSelector(selectIsAuth);
 
-  const [value, setValue] = React.useState('');
+  const [text, setText] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tags, setTags] = React.useState('');
   const [imageUrl, setImageUrl] = React.useState('');
@@ -40,8 +40,26 @@ export const AddPost = () => {
 
   /* необходимо делать через useCallback. Это необходимо для  SimpleMDE*/
   const onChange = React.useCallback((value) => {
-    setValue(value);
+    setText(value);
   }, []);
+
+  const onSubmit = async () => {
+    try {
+      setLoading(true);
+      const fields = {
+        title,
+        imageUrl,
+        tags,
+        text,
+      };
+      const { data } = await axios.post('/posts', fields);
+      const id = data._id;
+      navigate(`/posts/${id}`);
+    } catch (err) {
+      console.warn(err);
+      alert('Ошибка при создании статьи');
+    }
+  };
 
   /*Настройки для SimpleMDE */
   const options = React.useMemo(
@@ -115,12 +133,12 @@ export const AddPost = () => {
       />
       <SimpleMDE
         className={styles.editor}
-        value={value}
+        value={text}
         onChange={onChange}
         options={options}
       />
       <div className={styles.buttons}>
-        <Button size="large" variant="contained">
+        <Button onClick={onSubmit} size="large" variant="contained">
           Опубликовать
         </Button>
         <a href="/">
