@@ -18,6 +18,7 @@ export const AddPost = () => {
   const [title, setTitle] = React.useState('');
   const [tags, setTags] = React.useState('');
   const [imageUrl, setImageUrl] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
   const inputFileRef = React.useRef(null);
 
   const handleChangeFile = async (event) => {
@@ -33,7 +34,9 @@ export const AddPost = () => {
     }
   };
 
-  const onClickRemoveImage = () => {};
+  const onClickRemoveImage = () => {
+    setImageUrl('');
+  };
 
   /* необходимо делать через useCallback. Это необходимо для  SimpleMDE*/
   const onChange = React.useCallback((value) => {
