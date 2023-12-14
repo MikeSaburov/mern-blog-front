@@ -65,7 +65,7 @@ const postSlice = createSlice({
     //Удаление статьи
     [fetchRemovePost.pending]: (state, action) => {
       state.posts.items = state.posts.items.filter(
-        (obj) => obj._id === action.payload
+        (obj) => obj._id !== action.meta.arg
       );
     },
   },
